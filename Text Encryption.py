@@ -9,8 +9,8 @@ def GenerateKey():
     
 while 1:
     try:
-        with open('Key.key', 'rb') as MyKey:
-            Key = MyKey.read()
+        with open('Key.key', 'rb') as UserKey:
+            Key = UserKey.read()
             print("Key found.")
             break
     except FileNotFoundError:
@@ -21,19 +21,19 @@ f = Fernet(Key)
 
 def EncryptFile(ChosenFile):
     with open(ChosenFile, 'rb') as OriginalFile:
-        original = OriginalFile.read()
-    encrypted = f.encrypt(original)
+        Original = OriginalFile.read()
+    Encrypted = f.encrypt(Original)
     with open (ChosenFile, 'wb') as EncryptedFile:
-        EncryptedFile.write(encrypted)
+        EncryptedFile.write(Encrypted)
     print("File encrypyed.")
 
 def DecryptFile(ChosenFile):
     with open (ChosenFile, 'rb') as EncryptedFile:
-        encrypted = EncryptedFile.read()
-    decrypted = f.decrypt(encrypted)
+        Encrypted = EncryptedFile.read()
+    Decrypted = f.decrypt(Encrypted)
     with open(ChosenFile, 'wb') as DecryptedFile:
-        DecryptedFile.write(decrypted)
-    print("File decrypyed.")
+        DecryptedFile.write(Decrypted)
+    print("File decrypted.")
 
 ChosenFile = input("Enter file path: ")
 MenuOption = int(input("\nChoose one: \n1. Encrypt \n2. Decrypt \n"))
